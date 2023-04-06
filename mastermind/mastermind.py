@@ -52,11 +52,11 @@ class Mastermind:
         if self.turn >= self.n_rows:
             done = True
             self.is_reset = False
-        reward += -1
+        reward += -0.1
         if action == self.code:
             done = True
             self.is_reset = False
-            reward += 10
+            reward += 1
         return (self.state, reward, done, info)
 
     def get_feedback(self, action: List):
