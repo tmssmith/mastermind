@@ -7,9 +7,7 @@ import numpy as np
 
 
 class Mastermind:
-    def __init__(
-        self, n_pegs: int, n_colours: int, n_rows: int, codes: List[List] = None
-    ):
+    def __init__(self, n_pegs: int, n_colours: int, n_rows: int, codes: List[List] = None):
         self.n_pegs = n_pegs
         self.n_colours = n_colours
         self.n_rows = n_rows
@@ -27,9 +25,7 @@ class Mastermind:
     def reset(self, code: List = None) -> np.ndarray:
         self.state = np.zeros((self.n_rows, self.n_pegs + 2), int)
         if code:
-            assert (
-                len(code) == self.n_pegs
-            ), "Provided code length does not equal the number of pegs"
+            assert len(code) == self.n_pegs, "Provided code length does not equal the number of pegs"
             assert code in self.actions, "Provided code is not in list of allowed codes"
             self.code = code
         else:
@@ -52,11 +48,11 @@ class Mastermind:
         if self.turn >= self.n_rows:
             done = True
             self.is_reset = False
-        reward += -0.1
+        reward += -1
         if action == self.code:
             done = True
             self.is_reset = False
-            reward += 1
+            reward += 10
         return (self.state, reward, done, info)
 
     def get_feedback(self, action: List):
